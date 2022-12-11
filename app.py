@@ -9,11 +9,19 @@ from flask_cors import cross_origin
 from openai import OpenAi
 import json
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["200 per day" , "50 per hour" , "5 per minute" , "1 per second"]
+)
 
 @app.route('/get_answer',methods= ['POST'])
 @cross_origin()
+
 def get_answer():
     try:
         #接收问题
@@ -43,10 +51,10 @@ def get_answer():
         msg = {
             'code': 400,
             'error': str(e),
-            'msg':'出现意外的错误，请检查你的配置'
+            'msg':'出现意外的错误，请联系开发者等会再问我吧！'
         }
         return jsonify(msg)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=61209)
+    app.run(host='0.0.0.0',port=2053)

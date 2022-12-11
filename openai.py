@@ -3,14 +3,19 @@
 # @Time     : 2022/12/8 16:44
 # @File     : openai.py
 # @Project  : openAI
+import random
+
 import requests
 
 
 class OpenAi:
     def __init__(self,prompt,max_tokens=1000,temperature=0.5):
         # 替换为你的api_key <https://beta.openai.com/account/api-keys>
-        # "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"
-        self.api_key = "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"
+        keys = ["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",
+               "sk - 1wbbwLm7JYTuKvQW2CLBT3BlbkFJJEpqu3a4Bw8p1CMAsXxV"
+               ]
+        key = random.choices(keys)
+        self.api_key = key[0]
         # 使用的模型:功能最强大的 GPT-3
         self.model = "text-davinci-003"
         # 询问的问题
@@ -40,7 +45,8 @@ class OpenAi:
                 response = requests.post(self.url, headers=headers, json=data)
 
                 # Print the response
-                answer = str(response.json()['choices'][0]['text'])
+
+                answer = response.json()['choices'][0]['text']
             else:
                 answer= "问题不能为空"
         else:
@@ -53,5 +59,3 @@ class OpenAi:
 #     pool.putRequest(res)
 #     print(res)
 # pool.wait()
-#ai = OpenAi(prompt="用js画一个爱心",max_tokens=2000,temperature=0.6)
-#print(ai.get_answer())
