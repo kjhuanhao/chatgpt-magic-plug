@@ -79,7 +79,7 @@ configs = \
 >  条件：未知错误
 
 ```json
-msg = {
+{
     'code': 400,
     'error': str(e),
     'msg':'出现意外的错误，请检查你的配置'
