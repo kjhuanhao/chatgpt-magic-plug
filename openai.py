@@ -9,7 +9,7 @@ import requests
 
 
 class OpenAi:
-    def __init__(self,prompt,max_tokens=configs['max_tokens'],temperature=configs['temperature']):
+    def __init__(self,prompt,max_tokens=1000,temperature=0.6):
         # 替换为你的api_key <https://beta.openai.com/account/api-keys>
         keys = configs['keys']
         key = random.choices(keys)
@@ -52,9 +52,5 @@ class OpenAi:
             answer = '你的max_tokens或temperature值过大！'
         return answer
 
-# pool = threadpool.ThreadPool(10)
-# resps = threadpool.makeRequests(OpenAi(prompt="用js画一个爱心",max_tokens=2000,temperature=0.6).get_answer,'')
-# for res in resps:
-#     pool.putRequest(res)
-#     print(res)
-# pool.wait()
+# ai = OpenAi(prompt='你好')
+# print(ai.get_answer())

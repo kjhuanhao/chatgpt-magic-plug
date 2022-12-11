@@ -10,6 +10,7 @@ from openai import OpenAi
 import json
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from config import configs
 
 
 app = Flask(__name__)
@@ -32,15 +33,17 @@ def get_answer():
 
             ai = OpenAi(prompt=prompt,max_tokens=data['max_tokens'],temperature=data['temperature'])
             answer = ai.get_answer()
-
+            print(2)
             msg = {
                 "code": 200,
                 "msg": answer
             }
 
+
         except:
             ai = OpenAi(prompt=prompt)
             answer = ai.get_answer()
+            print('1')
             msg = {
                 "code": 200,
                 "msg": answer
@@ -57,4 +60,7 @@ def get_answer():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=2053)
+    if configs['keys']:
+        app.run(host='0.0.0.0',port=2053)
+    else:
+        print('请配置你的Keys')
