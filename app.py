@@ -8,9 +8,9 @@ from flask import Flask,request,jsonify
 from flask_cors import cross_origin
 from openai import OpenAi
 import json
-
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+
 
 app = Flask(__name__)
 limiter = Limiter(
@@ -21,8 +21,8 @@ limiter = Limiter(
 
 @app.route('/get_answer',methods= ['POST'])
 @cross_origin()
-
 def get_answer():
+
     try:
         #接收问题
         data = json.loads(request.data)

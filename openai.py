@@ -4,16 +4,14 @@
 # @File     : openai.py
 # @Project  : openAI
 import random
-
+from config import configs
 import requests
 
 
 class OpenAi:
-    def __init__(self,prompt,max_tokens=1000,temperature=0.5):
+    def __init__(self,prompt,max_tokens=configs['max_tokens'],temperature=configs['temperature']):
         # 替换为你的api_key <https://beta.openai.com/account/api-keys>
-        keys = ["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",
-               "sk - 1wbbwLm7JYTuKvQW2CLBT3BlbkFJJEpqu3a4Bw8p1CMAsXxV"
-               ]
+        keys = configs['keys']
         key = random.choices(keys)
         self.api_key = key[0]
         # 使用的模型:功能最强大的 GPT-3
@@ -23,6 +21,7 @@ class OpenAi:
         self.url = "https://api.openai.com/v1/completions"
         # 这个是设置回答的长度,最大可以设置到4096 (免费额度为$18,该值影响你的用量)
         self.max_tokens = max_tokens
+
         #值越高意味着模型将承担更多风险。对于更具创造性的应用程序，请尝试 0.9,建议0.5-0.6
         self.temperature = temperature
     def get_answer(self):
