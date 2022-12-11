@@ -80,9 +80,9 @@ configs = \
 
 ```json
 {
-    'code': 400,
-    'error': str(e),
-    'msg':'出现意外的错误，请检查你的配置'
+    "code": 400,
+    "error": str(e),
+    "msg":'出现意外的错误，请检查你的配置'
 }
 ```
 
