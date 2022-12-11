@@ -29,7 +29,7 @@ flask_limiter
 
 ### 配置项
 
-```json
+```python
 configs = \
 {
 # 替换为你的api_key <https://beta.openai.com/account/api-keys>
