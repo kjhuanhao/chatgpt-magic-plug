@@ -10,7 +10,11 @@ from openai import OpenAi
 import json
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from config import configs
+from concurrent.futures import ThreadPoolExecutor
 
+t = ThreadPoolExecutor(max_workers=200)
+a = OpenAi()
 
 app = Flask(__name__)
 limiter = Limiter(
@@ -29,9 +33,8 @@ def get_answer():
         prompt = data['prompt']
 
         try:
-
-            ai = OpenAi(prompt=prompt,max_tokens=data['max_tokens'],temperature=data['temperature'])
-            answer = ai.get_answer()
+            ai = t.submit(a.get_answer,prompt=prompt,max_tokens=data['max_tokens'],temperature=data['temperature'])
+            answer = ai.result(timeout=60)
 
             msg = {
                 "code": 200,
@@ -39,8 +42,12 @@ def get_answer():
             }
 
         except:
-            ai = OpenAi(prompt=prompt)
-            answer = ai.get_answer()
+            ai = t.submit(a.get_answer,prompt=prompt)
+            answer = ai.result(timeout=60)
+
+            # ai = OpenAi(prompt=prompt)
+            # answer = ai.get_answer()
+
             msg = {
                 "code": 200,
                 "msg": answer
@@ -57,4 +64,7 @@ def get_answer():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',port=2053)
+    if configs['keys']:
+        app.run(host='0.0.0.0',port=2053,debug=True)
+    else:
+        print('请配置你的Keys')
