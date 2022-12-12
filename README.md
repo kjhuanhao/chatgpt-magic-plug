@@ -30,7 +30,7 @@ flask_limiter
 
 ### 配置项
 
-在`config.py`文件
+在`config.py`文件可以看到以下选项
 
 ```python
 configs = \
@@ -46,7 +46,11 @@ configs = \
 }
 ```
 
+### 如何获取key
 
+1. 拥有一个openai的账号
+2. 进入<https://beta.openai.com/account/api-keys>
+3. 点击`Create new secret key`即可获取
 
 ### 接口文档
 
