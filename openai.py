@@ -14,7 +14,7 @@ class OpenAi:
         self.model = "text-davinci-003"
         self.url = "https://api.openai.com/v1/completions"
 
-    def get_answer(self,prompt,max_tokens=1000,temperature=0.6):
+    def get_answer(self,prompt,max_tokens,temperature):
         keys = configs['keys']
         key = random.choices(keys)
         api_key = key[0]
