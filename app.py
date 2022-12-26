@@ -16,19 +16,13 @@ from RecordLog import Flask_Log,System_Log
 from check_ip import check_ip_s
 
 
-t = ThreadPoolExecutor(max_workers=200)
+t = ThreadPoolExecutor(max_workers=500)
 a = OpenAi()
 
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
-
-# limiter = Limiter(
-#     app,
-#     key_func=get_remote_address,
-#     default_limits=["200 per day" , "60 per hour" , "10 per minute"]
-# )
 
 @app.route('/get_answer',methods= ['POST'])
 def get_answer():
@@ -44,7 +38,8 @@ def get_answer():
             try:
 
                 ai = t.submit(a.get_answer,prompt=prompt,max_tokens=configs['max_tokens'],temperature=configs['temperature'])
-                answer = ai.result(timeout=60)
+                answer = ai.result(timeout=120)
+                #answer = get_answer(prompt=prompt,max_tokens=configs['max_tokens'],temperature=configs['temperature'])
                 msg = {
                     "code": 200,
                     "msg": answer
@@ -76,7 +71,7 @@ def get_answer():
     except:
         msg = {
             'code': 404,
-            'msg': '服务器出现错误，开发者正在抢修中!'
+            'msg': '服务器压力过大，开发者正在抢修中，建议稍后重试!'
         }
 
         System_Log('error.log','a+')
@@ -84,7 +79,7 @@ def get_answer():
 
 if __name__ == '__main__':
     if configs['keys']:
-        app.run(host='0.0.0.0',port=2053)
+        app.run(host='127.0.0.1',port=2052)
     else:
         print('请配置你的Keys')
 

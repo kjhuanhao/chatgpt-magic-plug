@@ -6,7 +6,7 @@
 import random
 from config import configs
 import requests
-
+import markdown
 
 class OpenAi:
     def __init__(self):
@@ -38,11 +38,10 @@ class OpenAi:
                 # Print the response
 
                 answer = response.json()['choices'][0]['text']
+                answer = markdown.markdown(answer)
             else:
                 answer= "问题不能为空"
         else:
             answer = '你的max_tokens或temperature值过大！'
         return answer
 
-# ai = OpenAi(prompt='你好')
-# print(ai.get_answer())
