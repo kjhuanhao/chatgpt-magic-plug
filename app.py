@@ -33,9 +33,10 @@ CORS(app, supports_credentials=True)
 @app.route('/get_answer',methods= ['POST'])
 def get_answer():
 
-    try:
+    # try:
         data = json.loads(request.data)
         prompt = data['prompt']
+        print(prompt)
         #IP限制
         user_ip = request.headers.get('X-Forwarded-For', request.remote_addr)
         state = check_ip_s(user_ip)
@@ -73,7 +74,7 @@ def get_answer():
             Flask_Log('chatgpt.log', 'a+', state['code'], warning_log)
             return jsonify(msg)
 
-    except:
+    # except:
         msg = {
             'code': 404,
             'msg': '服务器出现错误，开发者正在抢修中!'
@@ -83,8 +84,6 @@ def get_answer():
         return jsonify(msg)
 
 if __name__ == '__main__':
-    if configs['keys']:
-        app.run(host='0.0.0.0',port=2053)
-    else:
-        print('请配置你的Keys')
+    app.run(host='0.0.0.0',port=2053)
+
 

@@ -2,7 +2,7 @@ configs = \
 {
 # 替换为你的api_key <https://beta.openai.com/account/api-keys>
 "keys" : [
-          
+          "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"
           ],
 # 这个是设置回答的长度,最大可以设置到4096 (免费额度为$18,该值影响你的用量)
 "max_tokens":1000,
