@@ -39,6 +39,7 @@ flask
 flask_cors
 openai
 flask_limiter
+markdown
 ```
 
 ### 配置项
