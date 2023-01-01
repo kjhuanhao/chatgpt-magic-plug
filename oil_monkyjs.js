@@ -53,7 +53,7 @@
         console.log(kw.value)
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
-                "url": "http://175.178.190.131:2053/get_answer",
+                "url": "接口地址",
                 "data": JSON.stringify({
                     "prompt": kw.value,
                 }),
