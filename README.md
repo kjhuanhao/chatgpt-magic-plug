@@ -30,6 +30,13 @@
 
 使用纯Python实现
 
+## 必备组件
+
+```
+redis
+pandoc
+```
+
 ### 必备模块
 
 你可以使用`pip`安装它们
@@ -37,9 +44,9 @@
 ```python
 flask
 flask_cors
-openai
-flask_limiter
-markdown
+redis
+flask_cors
+pypandoc
 ```
 
 ### 配置项
