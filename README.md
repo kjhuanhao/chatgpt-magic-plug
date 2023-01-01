@@ -171,3 +171,8 @@ https://greasyfork.org/zh-CN/scripts/456447-chatgpt-magic
 在使用过程中如果有遇到bug的情况可以联系作者，邮箱如下
 * 1620842362@qq.com
 * 2077780946@qq.com
+
+## MIT开源协议
+
+请遵循[MIT开源协议](https://github.com/kjhuanhao/chatgpt-magic-plug/blob/main/LICENSE)
+
