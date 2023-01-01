@@ -79,13 +79,8 @@ def get_answer():
         return jsonify(msg)
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    app.run(host='0.0.0.0',port=2053)
-
-=======
     if configs['keys']:
         app.run(host='127.0.0.1',port=2052)
     else:
         print('请配置你的Keys')
->>>>>>> 09be0aa4d9879cd6c3e785f265fe8d2046299e5c
 
